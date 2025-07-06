@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Rock Paper Scissors</title>
+  <link rel="icon" type="image/png" href="icon.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: #090909;
+      color: white;
+      font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 20px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 7vw;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .choices {
+      display: flex;
+      gap: 5vw;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    .rock, .paper, .scissors {
+      background-color: transparent;
+      width: 25vw;
+      max-width: 180px;
+      aspect-ratio: 1/1;
+      cursor: pointer;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: contain;
+      border: none;
+      outline: none;
+      transition: transform 0.2s ease;
+    }
+
+    .rock:hover, .paper:hover, .scissors:hover {
+      transform: scale(1.1);
+    }
+
+    .rock {
+      background-image: url('rock.png');
+    }
+
+    .paper {
+      background-image: url('paper.png');
+    }
+
+    .scissors {
+      background-image: url('peace.png');
+    }
+
+    .result {
+      font-size: 5vw;
+      max-width: 90%;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    .reset {
+      padding: 12px 25px;
+      background-color: #1c1c1c;
+      border: 2px solid white;
+      color: white;
+      font-size: 4vw;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .reset:hover {
+      background-color: #580d0d;
+    }
+
+    @media (min-width: 768px) {
+      h1 {
+        font-size: 60px;
+      }
+
+      .result {
+        font-size: 32px;
+      }
+
+      .reset {
+        font-size: 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Rock Paper Scissors</h1>
+
+  <div class="choices">
+    <button class="rock" onclick="play('rock')"></button>
+    <button class="paper" onclick="play('paper')"></button>
+    <button class="scissors" onclick="play('scissors')"></button>
+  </div>
+
+  <div class="result" id="resultText">Choose your move!</div>
+
+  <button class="reset" onclick="resetGame()">Reset</button>
+
+  <script>
+    function play(userChoice) {
+      const choices = ['rock', 'paper', 'scissors'];
+      const computerChoice = choices[Math.floor(Math.random() * 3)];
+      let result = '';
+
+      if (userChoice === computerChoice) {
+        result = "It's a draw!";
+      } else if (
+        (userChoice === 'rock' && computerChoice === 'scissors') ||
+        (userChoice === 'paper' && computerChoice === 'rock') ||
+        (userChoice === 'scissors' && computerChoice === 'paper')
+      ) {
+        result = "You win!";
+      } else {
+        result = "You lose!";
+      }
+
+      document.getElementById('resultText').textContent =
+        `You chose ${userChoice}. Computer chose ${computerChoice}. ${result}`;
+    }
+
+    function resetGame() {
+      document.getElementById('resultText').textContent = "Choose your move!";
+    }
+  </script>
+
+</body>
+</html>
